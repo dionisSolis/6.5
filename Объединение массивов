@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+
+namespace qwerty
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> combination = new List<string>();
+            List<string> firstArray = new List<string>();
+            List<string> secondArray = new List<string>();
+
+            firstArray = EnterArray();
+            secondArray = EnterArray();
+            CombineArrays(ref combination, ref firstArray);
+            CombineArrays(ref combination, ref secondArray);
+
+            Console.WriteLine("\nКомбинация массивов");
+
+            foreach (string item in combination)
+            {
+                Console.Write(item + " ");
+            }
+
+        }
+
+        static int EnterInt()
+        {
+            int digit;
+            bool isInt;
+
+            isInt = int.TryParse(Console.ReadLine(), out digit);
+
+            if (!isInt || digit <= 0)
+            {
+                Console.Write("\nВведите корректное число. \nВвод...");
+                isInt = int.TryParse(Console.ReadLine(), out digit);
+            }
+
+            return digit;
+        }
+        
+        static List<string> EnterArray()
+        {
+            int length;
+            List<string> list = new List<string>();
+
+            Console.Write("Введите длину массива. \nВвод...");
+            length = EnterInt();
+            Console.WriteLine("\nВводите элементы в массив");
+
+            for (int i = 0; i < length; i++)
+            {
+                Console.Write((i+1) + ")");
+                list.Add(Console.ReadLine());
+            }
+
+            return list;
+        }
+
+        static void CombineArrays(ref List<string> combination, ref List<string> array)
+        {
+            foreach (string item in array)
+            {
+                if (!combination.Contains(item))
+                {
+                    combination.Add(item);
+                }
+            }
+        }
+    }
+}
